@@ -280,6 +280,22 @@ html {
     background: rgba(0, 212, 170, 0.5);
   }
 
+  /* Ticker scroll animation */
+  @keyframes ticker-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-33.333%); }
+  }
+  .ticker-scroll {
+    animation: ticker-scroll 40s linear infinite;
+    will-change: transform;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+  }
+  .ticker-scroll:hover {
+    animation-play-state: paused;
+  }
+
   /* Monospace ticker */
   .font-mono-ticker {
     font-family: 'JetBrains Mono', 'Courier New', monospace;

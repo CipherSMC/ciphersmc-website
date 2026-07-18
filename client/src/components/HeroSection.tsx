@@ -114,7 +114,7 @@ export default function HeroSection() {
         style={{ background: "linear-gradient(to bottom, transparent, #0a0f1e)" }}
       />
 
-      <div className="container relative z-10 pt-24 pb-16">
+      <div className="container relative z-10 pt-28 pb-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* ── Left: Copy ── */}
           <div className="space-y-8">

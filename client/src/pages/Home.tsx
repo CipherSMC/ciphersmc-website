@@ -4,6 +4,7 @@
  * Sections: Hero → About → Strategies → Indicators → Community → YouTube → Connect → Footer
  */
 import Navbar from "@/components/Navbar";
+import TickerBar from "@/components/TickerBar";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
 import StrategiesSection from "@/components/StrategiesSection";
@@ -16,6 +17,7 @@ import Footer from "@/components/Footer";
 export default function Home() {
   return (
     <div className="min-h-screen" style={{ background: "#0a0f1e" }}>
+      <TickerBar />
       <Navbar />
       <HeroSection />
       <div className="section-divider" />
