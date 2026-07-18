@@ -94,7 +94,7 @@ export default function HeroSection() {
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: "url('/manus-storage/hero_bg_21ad5d7b.jpg')",
+          backgroundImage: "url('/images/hero_bg.jpg')",
           opacity: 0.35,
         }}
       />
