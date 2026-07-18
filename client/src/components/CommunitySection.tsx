@@ -96,7 +96,7 @@ export default function CommunitySection() {
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage: "url('/manus-storage/community_bg_79dc5a10.jpg')",
+          backgroundImage: "url('/images/community_bg.jpg')",
           opacity: 0.1,
         }}
       />

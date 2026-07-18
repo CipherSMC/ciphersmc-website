@@ -61,7 +61,7 @@ export default function Navbar() {
               className="w-9 h-9 rounded-full overflow-hidden ring-2 ring-[rgba(0,212,170,0.4)] transition-all duration-200 group-hover:ring-[#00d4aa]"
               >
                 <img
-                  src="/manus-storage/profile_avatar_517766fb.jpg"
+                  src="/images/profile_avatar.jpg"
                   alt="Cipher SMC"
                   className="w-full h-full object-cover"
                 />

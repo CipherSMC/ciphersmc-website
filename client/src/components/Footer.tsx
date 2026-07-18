@@ -29,7 +29,7 @@ export default function Footer() {
               style={{ border: "1px solid rgba(0, 212, 170, 0.25)" }}
             >
               <img
-                src="/manus-storage/profile_avatar_517766fb.jpg"
+                src="/images/profile_avatar.jpg"
                 alt="Cipher SMC"
                 className="w-full h-full object-cover"
               />

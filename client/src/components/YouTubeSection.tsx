@@ -115,7 +115,7 @@ export default function YouTubeSection() {
         >
           <div className="relative">
             <img
-              src="/manus-storage/youtube_banner_full_1ebca3fe.jpg"
+              src="/images/youtube_banner_full.jpg"
               alt="Cipher SMC YouTube Channel"
               className="w-full object-cover"
               style={{ maxHeight: "180px", objectPosition: "center" }}
@@ -133,7 +133,7 @@ export default function YouTubeSection() {
           >
             <div className="flex items-center gap-3">
               <img
-                src="/manus-storage/profile_avatar_517766fb.jpg"
+                src="/images/profile_avatar.jpg"
                 alt="Cipher SMC"
                 className="w-10 h-10 rounded-full object-cover"
                 style={{ border: "1.5px solid rgba(0, 212, 170, 0.3)" }}

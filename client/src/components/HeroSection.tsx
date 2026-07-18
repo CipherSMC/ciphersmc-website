@@ -94,7 +94,7 @@ export default function HeroSection() {
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: "url('/manus-storage/hero_bg_3a618b0e.jpg')",
+          backgroundImage: "url('/images/hero_bg.jpg')",
           opacity: 0.35,
         }}
       />
@@ -252,7 +252,7 @@ export default function HeroSection() {
                 }}
               >
                 <img
-                  src="/manus-storage/profile_avatar_517766fb.jpg"
+                  src="/images/profile_avatar.jpg"
                   alt="Cipher SMC"
                   className="w-full h-full object-cover"
                 />
