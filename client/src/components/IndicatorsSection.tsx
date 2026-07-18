@@ -115,14 +115,14 @@ export default function IndicatorsSection() {
         </div>
 
         {/* Indicators Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 mb-8">
           {indicators.map((ind, i) => (
             <a
               key={ind.name}
               href={ind.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="animate-fade-up p-5 rounded-xl card-hover group block relative overflow-hidden"
+              className="animate-fade-up p-4 sm:p-5 rounded-xl card-hover group block relative overflow-hidden"
               style={{
                 background: "rgba(26, 34, 53, 0.7)",
                 border: "1px solid rgba(255,255,255,0.06)",
@@ -157,12 +157,12 @@ export default function IndicatorsSection() {
                 </div>
 
                 <h3
-                  className="font-semibold text-white text-sm leading-tight mb-2"
+                  className="font-semibold text-white text-sm leading-snug mb-2"
                   style={{ fontFamily: "'Space Grotesk', sans-serif" }}
                 >
                   {ind.name}
                 </h3>
-                <p className="text-xs leading-relaxed mb-4" style={{ color: "#6b7280" }}>
+                <p className="text-xs leading-relaxed mb-3" style={{ color: "#6b7280" }}>
                   {ind.description}
                 </p>
 

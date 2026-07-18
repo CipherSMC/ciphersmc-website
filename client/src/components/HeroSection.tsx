@@ -94,7 +94,7 @@ export default function HeroSection() {
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: "url('/images/hero_bg.jpg')",
+          backgroundImage: "url('/manus-storage/hero_bg_21ad5d7b.jpg')",
           opacity: 0.35,
         }}
       />
@@ -137,7 +137,7 @@ export default function HeroSection() {
             {/* Headline */}
             <div className="animate-fade-up space-y-1" style={{ transitionDelay: "80ms" }}>
               <h1
-                className="text-5xl lg:text-6xl xl:text-7xl font-bold leading-[1.05] tracking-tight"
+                className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-[1.05] tracking-tight"
                 style={{ fontFamily: "'Space Grotesk', sans-serif" }}
               >
                 <span className="text-white">Mastering</span>
@@ -234,7 +234,7 @@ export default function HeroSection() {
           </div>
 
           {/* ── Right: Avatar + Stats ── */}
-          <div className="flex flex-col items-center lg:items-end gap-8">
+          <div className="flex flex-col items-center lg:items-end gap-6 lg:gap-8">
             {/* Avatar */}
             <div className="relative animate-fade-up float-animation" style={{ transitionDelay: "200ms" }}>
               <div
@@ -245,7 +245,7 @@ export default function HeroSection() {
                 }}
               />
               <div
-                className="relative w-64 h-64 lg:w-80 lg:h-80 rounded-full overflow-hidden"
+                className="relative w-48 h-48 sm:w-64 sm:h-64 lg:w-80 lg:h-80 rounded-full overflow-hidden"
                 style={{
                   border: "1.5px solid rgba(0, 212, 170, 0.35)",
                   boxShadow: "0 0 50px rgba(0, 212, 170, 0.18), 0 0 100px rgba(0, 212, 170, 0.06)",
@@ -260,11 +260,11 @@ export default function HeroSection() {
             </div>
 
             {/* Stats — terminal data panels */}
-            <div className="grid grid-cols-1 gap-2 w-full max-w-xs lg:max-w-sm">
+            <div className="grid grid-cols-1 gap-2 w-full max-w-full sm:max-w-xs lg:max-w-sm">
               {stats.map((s, i) => (
                 <div
                   key={s.label}
-                  className="animate-fade-up flex items-center gap-4 px-4 py-3 rounded"
+                  className="animate-fade-up flex items-center gap-2 sm:gap-4 px-3 sm:px-4 py-3 rounded"
                   style={{
                     background: "rgba(17, 24, 39, 0.7)",
                     border: "1px solid rgba(0, 212, 170, 0.1)",
@@ -273,18 +273,18 @@ export default function HeroSection() {
                   }}
                 >
                   <span
-                    className="font-mono-ticker text-xs w-20 flex-shrink-0"
+                    className="font-mono-ticker text-xs w-16 sm:w-20 flex-shrink-0"
                     style={{ color: "#00d4aa" }}
                   >
                     {s.mono}
                   </span>
                   <span
-                    className="text-lg font-bold flex-1"
+                    className="text-sm sm:text-lg font-bold flex-1 truncate"
                     style={{ fontFamily: "'Space Grotesk', sans-serif", color: "#f0f4ff" }}
                   >
                     {s.value}
                   </span>
-                  <span className="text-xs text-right" style={{ color: "#4b5563" }}>
+                  <span className="text-xs text-right hidden sm:block" style={{ color: "#4b5563" }}>
                     {s.label}
                   </span>
                 </div>

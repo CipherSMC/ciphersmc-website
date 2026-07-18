@@ -128,7 +128,7 @@ export default function YouTubeSection() {
             />
           </div>
           <div
-            className="px-5 py-4 flex items-center justify-between"
+            className="px-4 sm:px-5 py-4 flex items-center justify-between gap-3"
             style={{ background: "rgba(17, 24, 39, 0.95)" }}
           >
             <div className="flex items-center gap-3">
@@ -149,7 +149,7 @@ export default function YouTubeSection() {
                   className="text-xs"
                   style={{ color: "#6b7280", fontFamily: "'JetBrains Mono', monospace" }}
                 >
-                  @Cipher_SMC · 19 subscribers · 21 videos
+                  <span className="hidden sm:inline">@Cipher_SMC · </span>19 subscribers · 21 videos
                 </div>
               </div>
             </div>
@@ -167,7 +167,7 @@ export default function YouTubeSection() {
         </div>
 
         {/* Video Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
           {videos.map((video, i) => (
             <a
               key={video.id}
@@ -209,9 +209,9 @@ export default function YouTubeSection() {
               </div>
 
               {/* Info */}
-              <div className="p-4">
+              <div className="p-3 sm:p-4">
                 <h3
-                  className="font-semibold text-white text-sm leading-tight mb-2 line-clamp-2"
+                  className="font-semibold text-white text-xs sm:text-sm leading-tight mb-2 line-clamp-2"
                   style={{ fontFamily: "'Space Grotesk', sans-serif" }}
                 >
                   {video.title}

@@ -117,11 +117,11 @@ export default function StrategiesSection() {
         </div>
 
         {/* Strategy Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5 mb-12">
           {strategies.map((s, i) => (
             <div
               key={s.name}
-              className="animate-fade-up p-6 rounded-xl card-hover group relative overflow-hidden"
+              className="animate-fade-up p-5 sm:p-6 rounded-xl card-hover group relative overflow-hidden"
               style={{
                 background: "rgba(17, 24, 39, 0.8)",
                 border: `1px solid rgba(${s.color === "#00d4aa" ? "0,212,170" : s.color === "#00b4d8" ? "0,180,216" : "167,139,250"},0.15)`,
@@ -162,12 +162,12 @@ export default function StrategiesSection() {
               </div>
 
               <h3
-                className="text-xl font-bold text-white mb-3"
+                className="text-lg sm:text-xl font-bold text-white mb-3"
                 style={{ fontFamily: "'Space Grotesk', sans-serif" }}
               >
                 {s.name}
               </h3>
-              <p className="text-sm leading-relaxed mb-5" style={{ color: "#6b7280" }}>
+              <p className="text-sm leading-relaxed mb-4" style={{ color: "#6b7280" }}>
                 {s.description}
               </p>
 

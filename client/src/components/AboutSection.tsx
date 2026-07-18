@@ -329,7 +329,7 @@ export default function AboutSection() {
 
                   {/* Content */}
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-start justify-between gap-2">
+                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 sm:gap-2">
                       <div>
                         <div
                           className="font-semibold text-white text-sm"
@@ -344,7 +344,7 @@ export default function AboutSection() {
                           {exp.company}
                         </div>
                       </div>
-                      <div className="text-right flex-shrink-0">
+                      <div className="text-left sm:text-right flex-shrink-0">
                         <div
                           className="text-xs"
                           style={{ color: "#4b5563", fontFamily: "'JetBrains Mono', monospace" }}
