@@ -23,6 +23,14 @@ const primaryLinks = [
     color: "#e5e7eb",
   },
   {
+    name: "LinkedIn",
+    desc: "FX Trader at The5ers · 259 connections",
+    url: "https://www.linkedin.com/in/ciphersmc/",
+    icon: "in",
+    badge: null,
+    color: "#0a66c2",
+  },
+  {
     name: "GitHub",
     desc: "96 open-source Pine Script indicators",
     url: "https://github.com/CipherSMC",
@@ -156,7 +164,7 @@ export default function ConnectSection() {
                   className="animate-fade-up flex items-center gap-3 p-4 rounded-xl transition-all duration-200 hover:scale-[1.02] group"
                   style={{
                     background: "rgba(17, 24, 39, 0.8)",
-                    border: `1px solid rgba(${link.color === "#00d4aa" ? "0,212,170" : link.color === "#e5e7eb" ? "255,255,255" : link.color === "#9ca3af" ? "156,163,175" : "239,68,68"},0.12)`,
+                    border: `1px solid rgba(${link.color === "#00d4aa" ? "0,212,170" : link.color === "#e5e7eb" ? "255,255,255" : link.color === "#9ca3af" ? "156,163,175" : link.color === "#0a66c2" ? "10,102,194" : "239,68,68"},0.12)`,
                     textDecoration: "none",
                     transitionDelay: `${i * 50}ms`,
                   }}

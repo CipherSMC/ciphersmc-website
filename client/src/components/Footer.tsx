@@ -82,6 +82,7 @@ export default function Footer() {
         >
           {[
             { label: "Linktree", href: "https://linktr.ee/CipherSMC" },
+            { label: "LinkedIn", href: "https://www.linkedin.com/in/ciphersmc/" },
             { label: "GitHub", href: "https://github.com/CipherSMC" },
             { label: "Telegram", href: "https://t.me/CipherCryptoTrader" },
             { label: "YouTube", href: "https://www.youtube.com/@Cipher_SMC" },
