@@ -17,19 +17,19 @@ interface TickerItem {
 const INITIAL_TICKERS: TickerItem[] = [
   { symbol: "BTC", name: "Bitcoin", price: null, change24h: null, loading: true },
   { symbol: "ETH", name: "Ethereum", price: null, change24h: null, loading: true },
-  { symbol: "XAU", name: "Gold / USD", price: null, change24h: null, loading: true },
+  { symbol: "XAUT", name: "Tether Gold", price: null, change24h: null, loading: true },
   { symbol: "EUR/USD", name: "Euro / USD", price: null, change24h: null, loading: true },
   { symbol: "BNB", name: "BNB", price: null, change24h: null, loading: true },
   { symbol: "SOL", name: "Solana", price: null, change24h: null, loading: true },
 ];
 
 // CoinGecko IDs for crypto
-const CRYPTO_IDS = "bitcoin,ethereum,binancecoin,solana";
+const CRYPTO_IDS = "bitcoin,ethereum,tether-gold,binancecoin,solana";
 
 // Format price with appropriate decimals
 function formatPrice(price: number, symbol: string): string {
   if (symbol === "EUR/USD") return price.toFixed(4);
-  if (symbol === "XAU") return price.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  if (symbol === "XAUT") return price.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   if (price >= 1000) return price.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   if (price >= 1) return price.toFixed(2);
   return price.toFixed(4);
@@ -67,7 +67,7 @@ function TickerChip({ item }: { item: TickerItem }) {
           style={{ fontFamily: "'JetBrains Mono', monospace", color: "#f0f4ff" }}
         >
           {item.price !== null
-            ? `${item.symbol === "XAU" || item.symbol === "EUR/USD" ? "" : "$"}${formatPrice(item.price, item.symbol)}`
+            ? `${item.symbol === "XAUT" || item.symbol === "EUR/USD" ? "" : "$"}${formatPrice(item.price, item.symbol)}`
             : "—"}
         </span>
       )}
@@ -109,22 +109,7 @@ export default function TickerBar() {
       if (!cryptoRes.ok) throw new Error("CoinGecko API error");
       const cryptoData = await cryptoRes.json();
 
-      // Fetch XAU/USD from metals-api alternative (use frankfurter for EUR/USD, metals.live for gold)
-      let xauPrice: number | null = null;
-      let xauChange: number | null = null;
-      try {
-        const xauRes = await fetch(
-          "https://api.metals.live/v1/spot/gold",
-          { signal: AbortSignal.timeout(5000) }
-        );
-        if (xauRes.ok) {
-          const xauData = await xauRes.json();
-          xauPrice = xauData?.[0]?.price ?? null;
-        }
-      } catch {
-        // Fallback: use a static approximate if metals API fails
-        xauPrice = null;
-      }
+      // XAUT price comes from CoinGecko tether-gold (already in cryptoData)
 
       // Fetch EUR/USD from frankfurter
       let eurUsdPrice: number | null = null;
@@ -158,10 +143,10 @@ export default function TickerBar() {
           loading: false,
         },
         {
-          symbol: "XAU",
-          name: "Gold / USD",
-          price: xauPrice,
-          change24h: xauChange,
+          symbol: "XAUT",
+          name: "Tether Gold",
+          price: cryptoData?.["tether-gold"]?.usd ?? null,
+          change24h: cryptoData?.["tether-gold"]?.usd_24h_change ?? null,
           loading: false,
         },
         {
