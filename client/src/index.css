@@ -302,4 +302,13 @@ html {
     font-size: 0.875rem;
     letter-spacing: 0.05em;
   }
+
+  /* TradingView widget — force iframe to fill container */
+  .tradingview-widget-container,
+  .tradingview-widget-container__widget,
+  .tradingview-widget-container iframe {
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+  }
 }

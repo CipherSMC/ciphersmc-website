@@ -49,6 +49,10 @@ export default function LiveAnalysisSection() {
       save_image: true,
       calendar: false,
       hide_volume: false,
+      withdateranges: true,
+      details: true,
+      hotlist: false,
+      news: [],
       support_host: "https://www.tradingview.com",
     });
 
@@ -235,11 +239,17 @@ export default function LiveAnalysisSection() {
           <div
             ref={widgetRef}
             className="tradingview-widget-container"
-            style={{ height: "700px", background: "#0a0f1e" }}
+            style={{
+              height: "calc(80vh - 48px)",
+              minHeight: "600px",
+              maxHeight: "900px",
+              background: "#0a0f1e",
+              position: "relative",
+            }}
           >
             <div
               className="tradingview-widget-container__widget"
-              style={{ height: "100%", width: "100%" }}
+              style={{ height: "100%", width: "100%", position: "absolute", inset: 0 }}
             />
           </div>
         </div>
