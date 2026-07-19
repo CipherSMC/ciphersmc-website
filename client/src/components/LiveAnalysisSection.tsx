@@ -166,8 +166,6 @@ export default function LiveAnalysisSection() {
                   border: "1px solid rgba(0,212,170,0.2)",
                   boxShadow: "0 8px 32px rgba(0,0,0,0.6)",
                   zIndex: 99999,
-                  position: "fixed",
-                  marginTop: "4px",
                 }}
               >
                 {SYMBOLS.map((sym) => (
@@ -199,7 +197,7 @@ export default function LiveAnalysisSection() {
             border: "1px solid rgba(0, 212, 170, 0.15)",
             boxShadow: "0 0 60px rgba(0, 212, 170, 0.06), 0 24px 80px rgba(0,0,0,0.5)",
             position: "relative",
-            zIndex: dropdownOpen ? 0 : 1,
+            zIndex: 1,
           }}
         >
           {/* HUD top bar */}
@@ -250,6 +248,8 @@ export default function LiveAnalysisSection() {
           </div>
 
           {/* TradingView iframe — direct embed for reliable full-height rendering */}
+          {/* NOTE: iframe is hidden (not removed) while dropdown is open — the only
+              reliable way to prevent iframes from rendering above HTML dropdowns */}
           <div style={{ height: "75vh", minHeight: "550px", maxHeight: "850px", position: "relative" }}>
             <iframe
               key={activeSymbol.value}
@@ -259,11 +259,11 @@ export default function LiveAnalysisSection() {
                 height: "100%",
                 border: "none",
                 display: "block",
+                visibility: dropdownOpen ? "hidden" : "visible",
               }}
               allowFullScreen
               title={`TradingView Chart — ${activeSymbol.label}`}
             />
-
           </div>
         </div>
 
