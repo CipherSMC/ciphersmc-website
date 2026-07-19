@@ -37,11 +37,17 @@ function buildIframeSrc(symbol: string) {
     hotlist: "false",
     calendar: "false",
     autosize: "true",
-    hide_side_toolbar: "true",
-    watchlist: "",
-    studies_overrides: "",
+    hide_side_toolbar: "false",
+    // Suppress the right-side watchlist panel
+    watchlist: "[]",
+    show_popup_button: "false",
+    popup_width: "0",
+    popup_height: "0",
+    no_referral_id: "true",
+    container_id: "cipher_tv_chart",
   });
-  return `https://s.tradingview.com/widgetembed/?${params.toString()}`;
+  // Use the chart embed URL which does not include the watchlist panel
+  return `https://s.tradingview.com/embed-widget/advanced-chart/?${params.toString()}`;
 }
 
 export default function LiveAnalysisSection() {
