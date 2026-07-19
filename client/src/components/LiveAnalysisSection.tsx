@@ -53,8 +53,9 @@ function buildIframeSrc(symbol: string) {
     calendar: "false",
     autosize: "true",
     hide_side_toolbar: "false",
-    watchlist: JSON.stringify(CRYPTO_WATCHLIST),
   });
+  // TradingView watchlist requires each symbol appended as a separate "watchlist[]" param
+  CRYPTO_WATCHLIST.forEach((sym) => params.append("watchlist[]", sym));
   return `https://s.tradingview.com/widgetembed/?${params.toString()}`;
 }
 
