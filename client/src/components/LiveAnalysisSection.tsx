@@ -236,7 +236,7 @@ export default function LiveAnalysisSection() {
           </div>
 
           {/* TradingView iframe — direct embed for reliable full-height rendering */}
-          <div style={{ height: "75vh", minHeight: "550px", maxHeight: "850px" }}>
+          <div style={{ height: "75vh", minHeight: "550px", maxHeight: "850px", position: "relative" }}>
             <iframe
               key={activeSymbol.value}
               src={buildIframeSrc(activeSymbol.value)}
@@ -248,6 +248,21 @@ export default function LiveAnalysisSection() {
               }}
               allowFullScreen
               title={`TradingView Chart — ${activeSymbol.label}`}
+            />
+            {/* Cover the TradingView watchlist/right-panel — it is stored in user's browser
+                localStorage and cannot be disabled via URL params alone */}
+            <div
+              aria-hidden="true"
+              style={{
+                position: "absolute",
+                top: 0,
+                right: 0,
+                bottom: 0,
+                width: "220px",
+                background: "#0a0f1e",
+                pointerEvents: "none",
+                zIndex: 10,
+              }}
             />
           </div>
         </div>
