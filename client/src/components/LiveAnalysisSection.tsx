@@ -37,6 +37,9 @@ function buildIframeSrc(symbol: string) {
     hotlist: "false",
     calendar: "false",
     autosize: "true",
+    hide_side_toolbar: "true",
+    watchlist: "",
+    studies_overrides: "",
   });
   return `https://s.tradingview.com/widgetembed/?${params.toString()}`;
 }
