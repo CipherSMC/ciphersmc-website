@@ -1,7 +1,7 @@
 /**
  * LiveAnalysisSection — Cipher SMC
  * Design: Institutional Edge — TradingView embedded chart with terminal HUD framing
- * Chart: BTCUSDT on Binance, dark theme, full-featured interactive widget
+ * Uses direct <iframe> src approach for reliable full-height rendering
  */
 import { useEffect, useRef, useState } from "react";
 import { Activity, ExternalLink, ChevronDown } from "lucide-react";
@@ -13,55 +13,38 @@ const SYMBOLS = [
   { label: "EUR/USD", value: "OANDA:EURUSD" },
   { label: "SOL/USDT", value: "BINANCE:SOLUSDT" },
   { label: "BNB/USDT", value: "BINANCE:BNBUSDT" },
+  { label: "XAUT/USD", value: "BINANCE:XAUTUSDT" },
+  { label: "HYPE/USDT", value: "HYPERLIQUID:HYPEUSDT" },
 ];
 
+function buildIframeSrc(symbol: string) {
+  const params = new URLSearchParams({
+    symbol,
+    interval: "D",
+    timezone: "Asia/Phnom_Penh",
+    theme: "dark",
+    style: "1",
+    locale: "en",
+    backgroundColor: "rgba(10,15,30,1)",
+    gridColor: "rgba(0,212,170,0.04)",
+    hide_top_toolbar: "false",
+    hide_legend: "false",
+    allow_symbol_change: "true",
+    save_image: "true",
+    hide_volume: "false",
+    withdateranges: "true",
+    details: "false",
+    hotlist: "false",
+    calendar: "false",
+    autosize: "true",
+  });
+  return `https://s.tradingview.com/widgetembed/?${params.toString()}`;
+}
+
 export default function LiveAnalysisSection() {
-  const containerRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
   const [activeSymbol, setActiveSymbol] = useState(SYMBOLS[0]);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const widgetRef = useRef<HTMLDivElement>(null);
-
-  // Inject TradingView Advanced Chart widget
-  const loadWidget = (symbol: string) => {
-    if (!widgetRef.current) return;
-
-    // Clear previous widget
-    widgetRef.current.innerHTML = "";
-
-    const script = document.createElement("script");
-    script.src = "https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js";
-    script.type = "text/javascript";
-    script.async = true;
-    script.innerHTML = JSON.stringify({
-      autosize: true,
-      symbol: symbol,
-      interval: "D",
-      timezone: "Asia/Phnom_Penh",
-      theme: "dark",
-      style: "1",
-      locale: "en",
-      backgroundColor: "rgba(10, 15, 30, 1)",
-      gridColor: "rgba(0, 212, 170, 0.04)",
-      hide_top_toolbar: false,
-      hide_legend: false,
-      allow_symbol_change: true,
-      save_image: true,
-      calendar: false,
-      hide_volume: false,
-      withdateranges: true,
-      details: true,
-      hotlist: false,
-      news: [],
-      support_host: "https://www.tradingview.com",
-    });
-
-    widgetRef.current.appendChild(script);
-  };
-
-  useEffect(() => {
-    loadWidget(activeSymbol.value);
-  }, [activeSymbol]);
 
   // Fade-in on scroll
   useEffect(() => {
@@ -78,11 +61,21 @@ export default function LiveAnalysisSection() {
     return () => observer.disconnect();
   }, []);
 
+  // Close dropdown on outside click
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (!target.closest("[data-dropdown]")) setDropdownOpen(false);
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
   return (
     <section
       id="analysis"
       ref={sectionRef}
-      className="py-28 relative overflow-hidden"
+      className="py-20 relative overflow-hidden"
       style={{ background: "#080d1a" }}
     >
       {/* Grid texture */}
@@ -95,7 +88,7 @@ export default function LiveAnalysisSection() {
 
       <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-10 relative z-10">
         {/* Header */}
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-10 animate-fade-up">
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-8 animate-fade-up">
           <div>
             <div
               className="inline-flex items-center gap-2 px-3 py-1 rounded text-xs font-medium mb-4"
@@ -124,10 +117,10 @@ export default function LiveAnalysisSection() {
           </div>
 
           {/* Symbol selector */}
-          <div className="relative flex-shrink-0">
+          <div className="relative flex-shrink-0" data-dropdown>
             <button
               onClick={() => setDropdownOpen((v) => !v)}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold transition-all duration-150"
+              className="flex items-center gap-2 px-5 py-3 rounded-lg text-sm font-semibold transition-all duration-150"
               style={{
                 background: "rgba(0, 212, 170, 0.08)",
                 border: "1px solid rgba(0, 212, 170, 0.25)",
@@ -149,11 +142,11 @@ export default function LiveAnalysisSection() {
 
             {dropdownOpen && (
               <div
-                className="absolute right-0 top-full mt-1 w-44 rounded-lg overflow-hidden z-20"
+                className="absolute right-0 top-full mt-1 w-48 rounded-lg overflow-hidden z-20"
                 style={{
                   background: "#111827",
                   border: "1px solid rgba(0,212,170,0.2)",
-                  boxShadow: "0 8px 32px rgba(0,0,0,0.5)",
+                  boxShadow: "0 8px 32px rgba(0,0,0,0.6)",
                 }}
               >
                 {SYMBOLS.map((sym) => (
@@ -180,27 +173,25 @@ export default function LiveAnalysisSection() {
 
         {/* Chart container */}
         <div
-          className="animate-fade-up rounded-2xl overflow-hidden relative"
+          className="animate-fade-up rounded-2xl overflow-hidden"
           style={{
             border: "1px solid rgba(0, 212, 170, 0.15)",
-            boxShadow: "0 0 40px rgba(0, 212, 170, 0.05), 0 20px 60px rgba(0,0,0,0.4)",
+            boxShadow: "0 0 60px rgba(0, 212, 170, 0.06), 0 24px 80px rgba(0,0,0,0.5)",
           }}
-          ref={containerRef}
         >
           {/* HUD top bar */}
           <div
-            className="flex items-center justify-between px-4 py-2.5"
+            className="flex items-center justify-between px-5 py-3"
             style={{
-              background: "rgba(10, 15, 30, 0.95)",
+              background: "rgba(10, 15, 30, 0.98)",
               borderBottom: "1px solid rgba(0, 212, 170, 0.1)",
             }}
           >
             <div className="flex items-center gap-3">
-              {/* Traffic lights */}
               <div className="flex gap-1.5">
-                <span className="w-2.5 h-2.5 rounded-full" style={{ background: "#ef4444", opacity: 0.7 }} />
-                <span className="w-2.5 h-2.5 rounded-full" style={{ background: "#f59e0b", opacity: 0.7 }} />
-                <span className="w-2.5 h-2.5 rounded-full" style={{ background: "#22c55e", opacity: 0.7 }} />
+                <span className="w-3 h-3 rounded-full" style={{ background: "#ef4444", opacity: 0.7 }} />
+                <span className="w-3 h-3 rounded-full" style={{ background: "#f59e0b", opacity: 0.7 }} />
+                <span className="w-3 h-3 rounded-full" style={{ background: "#22c55e", opacity: 0.7 }} />
               </div>
               <span
                 className="text-xs font-medium"
@@ -209,7 +200,7 @@ export default function LiveAnalysisSection() {
                 CIPHER_SMC · CHART_TERMINAL
               </span>
             </div>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-4">
               <span
                 className="hidden sm:flex items-center gap-1.5 text-xs"
                 style={{ color: "#374151", fontFamily: "'JetBrains Mono', monospace" }}
@@ -224,10 +215,10 @@ export default function LiveAnalysisSection() {
                 href={`https://www.tradingview.com/chart/?symbol=${activeSymbol.value}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1 text-xs transition-colors hover:text-white"
+                className="flex items-center gap-1.5 text-xs transition-colors hover:text-white"
                 style={{ color: "#4b5563" }}
               >
-                <ExternalLink size={11} />
+                <ExternalLink size={12} />
                 <span className="hidden sm:inline" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
                   Open Full
                 </span>
@@ -235,28 +226,26 @@ export default function LiveAnalysisSection() {
             </div>
           </div>
 
-          {/* TradingView widget mount point */}
-          <div
-            ref={widgetRef}
-            className="tradingview-widget-container"
-            style={{
-              height: "calc(80vh - 48px)",
-              minHeight: "600px",
-              maxHeight: "900px",
-              background: "#0a0f1e",
-              position: "relative",
-            }}
-          >
-            <div
-              className="tradingview-widget-container__widget"
-              style={{ height: "100%", width: "100%", position: "absolute", inset: 0 }}
+          {/* TradingView iframe — direct embed for reliable full-height rendering */}
+          <div style={{ height: "75vh", minHeight: "550px", maxHeight: "850px" }}>
+            <iframe
+              key={activeSymbol.value}
+              src={buildIframeSrc(activeSymbol.value)}
+              style={{
+                width: "100%",
+                height: "100%",
+                border: "none",
+                display: "block",
+              }}
+              allowFullScreen
+              title={`TradingView Chart — ${activeSymbol.label}`}
             />
           </div>
         </div>
 
         {/* Disclaimer */}
         <p
-          className="mt-4 text-center text-xs animate-fade-up"
+          className="mt-5 text-center text-xs animate-fade-up"
           style={{ color: "#374151", fontFamily: "'JetBrains Mono', monospace" }}
         >
           NFA · DYOR · Chart data provided by TradingView. For educational purposes only.
