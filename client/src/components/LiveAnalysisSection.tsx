@@ -78,7 +78,7 @@ export default function LiveAnalysisSection() {
     <section
       id="analysis"
       ref={sectionRef}
-      className="py-24 relative overflow-hidden"
+      className="py-28 relative overflow-hidden"
       style={{ background: "#080d1a" }}
     >
       {/* Grid texture */}
@@ -89,9 +89,9 @@ export default function LiveAnalysisSection() {
         style={{ background: "linear-gradient(90deg, transparent, rgba(0,212,170,0.3), transparent)" }}
       />
 
-      <div className="container relative z-10">
+      <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-10 relative z-10">
         {/* Header */}
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-8 animate-fade-up">
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-10 animate-fade-up">
           <div>
             <div
               className="inline-flex items-center gap-2 px-3 py-1 rounded text-xs font-medium mb-4"
@@ -107,13 +107,13 @@ export default function LiveAnalysisSection() {
               LIVE ANALYSIS
             </div>
             <h2
-              className="text-3xl lg:text-4xl font-bold text-white mb-3"
+              className="text-4xl lg:text-6xl font-bold text-white mb-4"
               style={{ fontFamily: "'Space Grotesk', sans-serif" }}
             >
               Market{" "}
               <span className="gradient-text">Intelligence</span>
             </h2>
-            <p className="text-sm max-w-xl" style={{ color: "#8892a4" }}>
+            <p className="text-base max-w-2xl" style={{ color: "#8892a4" }}>
               Interactive institutional-grade charts. Switch instruments, change timeframes,
               and draw directly on the chart — powered by TradingView.
             </p>
@@ -235,7 +235,7 @@ export default function LiveAnalysisSection() {
           <div
             ref={widgetRef}
             className="tradingview-widget-container"
-            style={{ height: "580px", background: "#0a0f1e" }}
+            style={{ height: "700px", background: "#0a0f1e" }}
           >
             <div
               className="tradingview-widget-container__widget"
