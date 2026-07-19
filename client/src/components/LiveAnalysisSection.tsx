@@ -160,11 +160,14 @@ export default function LiveAnalysisSection() {
 
             {dropdownOpen && (
               <div
-                className="absolute right-0 top-full mt-1 w-48 rounded-lg overflow-hidden z-20"
+                className="absolute right-0 top-full mt-1 w-48 rounded-lg overflow-hidden"
                 style={{
                   background: "#111827",
                   border: "1px solid rgba(0,212,170,0.2)",
                   boxShadow: "0 8px 32px rgba(0,0,0,0.6)",
+                  zIndex: 99999,
+                  position: "fixed",
+                  marginTop: "4px",
                 }}
               >
                 {SYMBOLS.map((sym) => (
@@ -195,6 +198,8 @@ export default function LiveAnalysisSection() {
           style={{
             border: "1px solid rgba(0, 212, 170, 0.15)",
             boxShadow: "0 0 60px rgba(0, 212, 170, 0.06), 0 24px 80px rgba(0,0,0,0.5)",
+            position: "relative",
+            zIndex: dropdownOpen ? 0 : 1,
           }}
         >
           {/* HUD top bar */}
