@@ -1,7 +1,7 @@
 /**
  * Home Page — Cipher SMC
  * Design: Institutional Edge — dark mode trading personal site
- * Sections: Hero → About → Strategies → Indicators → Community → YouTube → Connect → Footer
+ * Sections: Hero → About → Strategies → Live Analysis → Indicators → Community → YouTube → Connect → Footer
  */
 import Navbar from "@/components/Navbar";
 import TickerBar from "@/components/TickerBar";
@@ -11,6 +11,7 @@ import StrategiesSection from "@/components/StrategiesSection";
 import IndicatorsSection from "@/components/IndicatorsSection";
 import CommunitySection from "@/components/CommunitySection";
 import YouTubeSection from "@/components/YouTubeSection";
+import LiveAnalysisSection from "@/components/LiveAnalysisSection";
 import ConnectSection from "@/components/ConnectSection";
 import Footer from "@/components/Footer";
 
@@ -24,6 +25,8 @@ export default function Home() {
       <AboutSection />
       <div className="section-divider" />
       <StrategiesSection />
+      <div className="section-divider" />
+      <LiveAnalysisSection />
       <div className="section-divider" />
       <IndicatorsSection />
       <div className="section-divider" />
