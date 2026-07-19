@@ -17,6 +17,21 @@ const SYMBOLS = [
   { label: "HYPE/USDT", value: "HYPERLIQUID:HYPEUSDT" },
 ];
 
+const CRYPTO_WATCHLIST = [
+  "BINANCE:BTCUSDT",
+  "BINANCE:ETHUSDT",
+  "BINANCE:BNBUSDT",
+  "BINANCE:SOLUSDT",
+  "BINANCE:XRPUSDT",
+  "BINANCE:ADAUSDT",
+  "BINANCE:AVAXUSDT",
+  "BINANCE:DOTUSDT",
+  "BINANCE:LINKUSDT",
+  "BINANCE:MATICUSDT",
+  "BINANCE:XAUTUSDT",
+  "HYPERLIQUID:HYPEUSDT",
+];
+
 function buildIframeSrc(symbol: string) {
   const params = new URLSearchParams({
     symbol,
@@ -38,16 +53,9 @@ function buildIframeSrc(symbol: string) {
     calendar: "false",
     autosize: "true",
     hide_side_toolbar: "false",
-    // Suppress the right-side watchlist panel
-    watchlist: "[]",
-    show_popup_button: "false",
-    popup_width: "0",
-    popup_height: "0",
-    no_referral_id: "true",
-    container_id: "cipher_tv_chart",
+    watchlist: JSON.stringify(CRYPTO_WATCHLIST),
   });
-  // Use the chart embed URL which does not include the watchlist panel
-  return `https://s.tradingview.com/embed-widget/advanced-chart/?${params.toString()}`;
+  return `https://s.tradingview.com/widgetembed/?${params.toString()}`;
 }
 
 export default function LiveAnalysisSection() {
@@ -249,21 +257,7 @@ export default function LiveAnalysisSection() {
               allowFullScreen
               title={`TradingView Chart — ${activeSymbol.label}`}
             />
-            {/* Cover the TradingView watchlist/right-panel — it is stored in user's browser
-                localStorage and cannot be disabled via URL params alone */}
-            <div
-              aria-hidden="true"
-              style={{
-                position: "absolute",
-                top: 0,
-                right: 0,
-                bottom: 0,
-                width: "220px",
-                background: "#0a0f1e",
-                pointerEvents: "none",
-                zIndex: 10,
-              }}
-            />
+
           </div>
         </div>
 
